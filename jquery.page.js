@@ -97,15 +97,14 @@
 			showLeng : 1,
 			backFn : function(){}
 		},options);
-		ms.init(this,args);
-	}
-	$.fn.initPage = function(options){
-		var args = $.extend({
-			pageCount : 10,
-			current : 1,
-			showLeng : 1,
-			backFn : function(){}
-		},options);
-		ms.fillHtml(this,args);
+		if(window.console){
+			console.log(this.children().length);
+		}
+		if(this.children().length == 0){
+			ms.init(this,args);
+		}else{
+			this.empty();//this.html("");
+			ms.fillHtml(this,args);
+		}
 	}
 })(jQuery);
