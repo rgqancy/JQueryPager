@@ -16,40 +16,40 @@ a:hover{ text-decoration:none;}
 </head>
 <body>
 <!-- 代码部分begin -->
-    <div id="pager1" class="tcdPageCode">
+    <div class="tcdPageCode" id="pager1">
     </div>
-    <pre>
-    调用方法：
-    $(".tcdPageCode").createPage({
-        pageCount:10,
-        current:1,
-        backFn:function(p){
-            //单击回调方法，p是当前页码
-        }
-    });
-    pageCount：总页数
-    current：当前页
-    </pre>
-    <div id="pager2" class="tcdPageCode">
-    </div>	
+	<div class="tcdPageCode" id="pager2">
+    </div>
 </body>
 <script src="http://www.lanrenzhijia.com/ajaxjs/jquery.min.js"></script>
 <script src="jquery.page.js"></script>
 <script>
-    $("#pager1").createPage({
-        pageCount:6,
-        current:1,
-        backFn:function(p){
-            console.log(p);
-        }
-    });
-    $("#pager2").createPage({
-        pageCount:10,
-        current:5,
-        backFn:function(p){
-            console.log(p);
-        }
-    });	
+	function createPager(pagerid,t,c){
+		$("#" + pagerid).createPage({
+			pageCount:t,
+			current:c,
+			showLeng : 1,
+			backFn:function(p){
+				createPager(pagerid,t,p);
+			}
+		});
+	}
+	
+	function getCurrentPage(pagerName){
+		var $curent = $("#"+pagerName+ " .current");
+		if(undefined != $curent && null != $curent && "" != $curent){
+			
+		}
+		var current = $curent.first().text();
+		if(undefined != current && null != current && "" != current){
+			return parseInt(current);
+		}
+		return current;
+	}
+
+	createPager('pager1',10,1);
+	
+	createPager('pager2',6,2);
 </script>
 <!-- 代码部分end -->
 </html>
